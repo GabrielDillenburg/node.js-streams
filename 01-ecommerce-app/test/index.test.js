@@ -35,13 +35,13 @@ describe('Test suite for Observer Pattern', () => {
     expect(observer.update).not.toHaveBeenCalled()
   })
   test('#Payment should notify subject after a credit card transaction', () => {
-    const paymentSubjectStub =  {
-      notify: jest.fn()
-    }
-    const sut = new Payment(paymentSubjectStub)
+    const paymentSubject = new PaymentSubject()
+    const sut = new Payment(paymentSubject)
+    const paymentSubjectNotifierSpy = jest.spyOn(paymentSubject, 'notify')
+
     const data = { id: 'someId', userName: 'jedi' }
     sut.creditCard(data)
-    expect(paymentSubjectStub.notify).toHaveBeenCalledWith(data)
+    expect(paymentSubjectNotifierSpy).toHaveBeenCalledWith(data)
   })
   test.todo('#All should notify after a credit card payment')
 
