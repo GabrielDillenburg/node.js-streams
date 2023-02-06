@@ -1,7 +1,28 @@
-import { expect, describe, test } from '@jest/globals'
+import { expect, describe, test, jest } from '@jest/globals'
+import Payment from '../src/events/payment.js'
+import Marketing from '../src/observers/marketing.js'
+import Shipment from '../src/observers/shipment.js'
+import PaymentSubject from '../src/subjects/paymentSubject.js'
+
 
 describe('Test suite for Observer Pattern', () => {
-  test ( '# env test', () => {
-    expect(true).toBe(true)
+  test('#PaymentSubject notify observers', () => {
+    const sut = new PaymentSubject()
+
+    // like marketing or shipment
+    const observer = {
+      update: jest.fn()
+    }
+    const data = { id: 'someId', userName: 'jedi' }
+    const expected = data
+    sut.subscribe(observer)
+    sut.notify(data)
+    expect(observer.update).toBeCalledWith(expected)
   })
+  test.todo('#PaymentSubject should not notify unsubscribed observers')
+  test.todo('#Payment should notify subject after a credit card transaction')
+  test.todo('#All should notify after a credit card payment')
+
+
+
 })
