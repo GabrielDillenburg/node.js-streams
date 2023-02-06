@@ -43,7 +43,27 @@ describe('Test suite for Observer Pattern', () => {
     sut.creditCard(data)
     expect(paymentSubjectNotifierSpy).toHaveBeenCalledWith(data)
   })
-  test.todo('#All should notify after a credit card payment')
+  test('#All should notify subscribers after a credit card payment', () => {
+    // subjects
+    const subject = new PaymentSubject()
+
+    const marketing = new Marketing()
+    const shipment = new Shipment()
+
+    const marketingUpdateFnSpy = jest.spyOn(marketing, marketing.update.name)
+    const mshipmentUpdateFnSpy = jest.spyOn(shipment, shipment.update.name)
+
+    subject.subscribe(marketing)
+    subject.subscribe(shipment)
+
+    const payment = new Payment(subject)
+    const data = { id: 1, userName: 'dillenburg'}
+    payment.creditCard(data)
+
+    expect(marketingUpdateFnSpy).toHaveBeenCalledWith(data)
+    expect(mshipmentUpdateFnSpy).toHaveBeenCalledWith(data)
+    
+  })
 
 
 
