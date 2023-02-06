@@ -19,7 +19,20 @@ describe('Test suite for Observer Pattern', () => {
     sut.notify(data)
     expect(observer.update).toBeCalledWith(expected)
   })
-  test.todo('#PaymentSubject should not notify unsubscribed observers')
+  test('#PaymentSubject should not notify unsubscribed observers', () => {
+    const sut = new PaymentSubject()
+
+    // like marketing or shipment
+    const observer = {
+      update: jest.fn()
+    }
+    const data = { id: 'someId', userName: 'jedi' }
+    sut.subscribe(observer)
+    sut.unsubscribe(observer)
+    sut.notify(data)
+
+    expect(observer.update).not.toHaveBeenCalled()
+  })
   test.todo('#Payment should notify subject after a credit card transaction')
   test.todo('#All should notify after a credit card payment')
 
