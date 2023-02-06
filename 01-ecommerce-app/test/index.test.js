@@ -7,6 +7,7 @@ import PaymentSubject from '../src/subjects/paymentSubject.js'
 
 
 describe('Test suite for Observer Pattern', () => {
+
   test('#PaymentSubject notify observers', () => {
     const sut = new PaymentSubject()
 
@@ -20,6 +21,7 @@ describe('Test suite for Observer Pattern', () => {
     sut.notify(data)
     expect(observer.update).toBeCalledWith(expected)
   })
+
   test('#PaymentSubject should not notify unsubscribed observers', () => {
     const sut = new PaymentSubject()
 
@@ -34,6 +36,7 @@ describe('Test suite for Observer Pattern', () => {
 
     expect(observer.update).not.toHaveBeenCalled()
   })
+
   test('#Payment should notify subject after a credit card transaction', () => {
     const paymentSubject = new PaymentSubject()
     const sut = new Payment(paymentSubject)
@@ -43,6 +46,7 @@ describe('Test suite for Observer Pattern', () => {
     sut.creditCard(data)
     expect(paymentSubjectNotifierSpy).toHaveBeenCalledWith(data)
   })
+
   test('#All should notify subscribers after a credit card payment', () => {
     // subjects
     const subject = new PaymentSubject()
@@ -64,7 +68,4 @@ describe('Test suite for Observer Pattern', () => {
     expect(mshipmentUpdateFnSpy).toHaveBeenCalledWith(data)
     
   })
-
-
-
 })
