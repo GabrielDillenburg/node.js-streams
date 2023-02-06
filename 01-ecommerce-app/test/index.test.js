@@ -1,4 +1,5 @@
 import { expect, describe, test, jest } from '@jest/globals'
+import { existsSync } from 'fs'
 import Payment from '../src/events/payment.js'
 import Marketing from '../src/observers/marketing.js'
 import Shipment from '../src/observers/shipment.js'
@@ -33,7 +34,15 @@ describe('Test suite for Observer Pattern', () => {
 
     expect(observer.update).not.toHaveBeenCalled()
   })
-  test.todo('#Payment should notify subject after a credit card transaction')
+  test('#Payment should notify subject after a credit card transaction', () => {
+    const paymentSubjectStub =  {
+      notify: jest.fn()
+    }
+    const sut = new Payment(paymentSubjectStub)
+    const data = { id: 'someId', userName: 'jedi' }
+    sut.creditCard(data)
+    expect(paymentSubjectStub.notify).toHaveBeenCalledWith(data)
+  })
   test.todo('#All should notify after a credit card payment')
 
 
