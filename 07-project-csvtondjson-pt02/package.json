@@ -1,0 +1,17 @@
+{
+  "name": "07-project-csvtondjson-pt01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test:cov": "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand --coverage",
+    "test":  "NODE_OPTIONS=--experimental-vm-modules npx jest --runInBand --coverage --watchAll"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "29.2"
+  }
+}
